@@ -1,0 +1,187 @@
+.dashOuter {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.loadingScreen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.greeting { font-size: 2rem; font-weight: 800; }
+.personaLabel {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.statsRow { display: flex; align-items: center; gap: 12px; }
+
+.xpCard {
+  background: white;
+  border: 2px solid var(--blue-light);
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: var(--shadow-base);
+}
+.xpTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.xpLabel { font-weight: 800; font-size: 1.1rem; color: var(--xp-color); }
+.xpNext { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+/* ── NEXT LESSON ── */
+.nextLessonCard {
+  background: linear-gradient(135deg, #EEF2FF 0%, #F0FDF4 100%);
+  border: 2px solid var(--blue-light);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-base);
+}
+.nextLessonBadge {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.nextLessonContent { display: flex; align-items: center; gap: 16px; flex: 1; }
+.nextLessonIcon { font-size: 2.5rem; }
+.nextLessonTitle { font-size: 1.2rem; font-weight: 800; }
+.nextLessonMeta { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+
+/* ── SECTION TITLE ── */
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: -8px;
+}
+
+/* ── PILLARS GRID ── */
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+.pillarCard {
+  background: white;
+  border: 2px solid var(--blue-light);
+  border-radius: 20px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: all 0.3s;
+  box-shadow: var(--shadow-base);
+  position: relative;
+  overflow: hidden;
+}
+.pillarCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--pillar-color);
+}
+.pillarCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--pillar-color);
+}
+.pillarTop { display: flex; justify-content: space-between; align-items: center; }
+.pillarEmoji { font-size: 2rem; }
+.pillarDone { font-size: 0.8rem; font-weight: 800; color: var(--text-muted); }
+.pillarName { font-size: 1.1rem; font-weight: 800; }
+.pillarDesc { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; flex: 1; }
+.pillarProgress {
+  height: 6px;
+  background: var(--blue-light);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+/* ── BADGES ── */
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+.badge {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 14px;
+  text-align: center;
+  border: 2px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s;
+}
+.badge:hover { transform: translateY(-3px); }
+.badgeEarned { border-color: var(--xp-color); background: var(--badge-bg); }
+.badgeLocked { border-color: var(--blue-light); opacity: 0.55; filter: grayscale(0.3); }
+.badgeEmoji { font-size: 2.2rem; }
+.badgeTitle { font-weight: 800; font-size: 0.9rem; color: var(--text-dark); }
+.badgeDesc { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+
+/* ── AI PROMO ── */
+.aiPromo {
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+  border-radius: 24px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: white;
+  box-shadow: 0 10px 40px rgba(49, 46, 129, 0.3);
+}
+.aiPromoContent { display: flex; align-items: center; gap: 20px; flex: 1; }
+.aiPromoContent h3 { font-size: 1.3rem; font-weight: 800; color: white; }
+.aiPromoContent p { color: rgba(255,255,255,0.75); font-size: 0.95rem; margin: 4px 0 0; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+  .dashOuter { padding: 24px 16px 60px; gap: 20px; }
+  .nextLessonCard { flex-direction: column; align-items: flex-start; }
+  .pillarsGrid { grid-template-columns: repeat(2, 1fr); }
+  .badgesGrid { grid-template-columns: repeat(3, 1fr); }
+  .aiPromo { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .pillarsGrid { grid-template-columns: 1fr 1fr; }
+  .badgesGrid { grid-template-columns: repeat(2, 1fr); }
+  .greeting { font-size: 1.6rem; }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinLit AI - Smart Financial Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <svg class="bg-arrow-container" viewBox="0 0 100 1000" preserveAspectRatio="none">
+    <path id="drawing-arrow" class="draw-path" d="M 80 150 Q 10 350 80 550 T 20 850" />
+  </svg>
+
+  <main id="landing-view" class="active">
+    
+    <!-- HERO SECTION -->
+    <header class="section hero-section glass-bg parallax-layer" data-speed="0.05">
+      <div class="hero-content">
+        <div class="pill-badge hero-anim hero-anim-1 parallax-layer" data-speed="-0.1">🎓 FinLit AI Platform</div>
+        <h1 class="hero-anim hero-anim-2 parallax-layer" data-speed="-0.15">Master Money.<br>Make Smarter Decisions.<br><span class="primary-text">Every Single Day.</span></h1>
+        <p class="subheading hero-anim hero-anim-3 parallax-layer" data-speed="-0.05" style="max-width: 600px; margin: 0 auto 40px; font-size: 1.35rem;">
+          A human-centric, AI-powered financial education app for India.<br>
+          We replace boring lectures with real-life scenario training.
+        </p>
+        <div class="dual-cta hero-anim hero-anim-4">
+          <button class="cta-button" onclick="alert('Module loading interface soon!')">
+            🚀 Start Learning Free
+          </button>
+          <button class="cta-button accent-mode" onclick="startSurvey()">
+            📊 Get Your AI Roadmap
+          </button>
+        </div>
+        <p class="small-text center-text hero-anim hero-anim-4">No prior knowledge required. Just 5 minutes a day.</p>
+      </div>
+      <div class="hero-image-wrapper hero-anim hero-anim-3 parallax-layer" data-speed="0.2">
+        <img src="finlit.jpeg" alt="FinLit Graphic" class="finlit-img">
+      </div>
+    </header>
+
+    <!-- PROBLEM SECTION (Reduced & Punchier) -->
+    <section class="section problem-section">
+      <div class="container">
+        
+        <div class="chart-container scroll-reveal" style="--i:1; height: 140px;">
+          <div class="chart-bar chart-bar-1"></div>
+          <div class="chart-bar chart-bar-2"></div>
+          <div class="chart-bar chart-bar-3"></div>
+        </div>
+
+        <div class="problem-header scroll-reveal" style="--i:2;">
+          <h2>Why Most Indians Struggle With Money</h2>
+        </div>
+        
+        <div class="cards-grid">
+          <div class="problem-card scroll-reveal" style="--i:1;">
+            <div class="icon-bullet">📉</div> 
+            <div><h3>Zero Basics</h3><p>We're rarely taught practical wealth-building before we start earning.</p></div>
+          </div>
+          <div class="problem-card scroll-reveal" style="--i:2;">
+            <div class="icon-bullet">💳</div> 
+            <div><h3>Credit Traps</h3><p>Easy EMIs & BNPL inevitably lead to silent, compounding debt cycles.</p></div>
+          </div>
+          <div class="problem-card scroll-reveal" style="--i:3;">
+            <div class="icon-bullet">🤯</div> 
+            <div><h3>Jargon Overload</h3><p>Taxes, mutual funds, and SIPs feel intentionally overwhelming.</p></div>
+          </div>
+          <div class="problem-card scroll-reveal" style="--i:4;">
+            <div class="icon-bullet">⚠️</div> 
+            <div><h3>Scam Vulnerability</h3><p>Massive information gaps leave us exposed to 'quick money' traps.</p></div>
+          </div>
+        </div>
+
+        <h3 class="bold-statement scroll-reveal">It’s not a lack of intelligence.<br><span class="accent-text">It’s a lack of structured education.</span></h3>
+      </div>
+    </section>
+
+    <!-- FINLIT AI SOLUTION (3 Pillars) -->
+    <section class="section glass-bg-alt scroll-reveal">
+      <div class="container">
+        <h2>A Smarter Way to Learn</h2>
+        <p class="subheading">Bite-sized mechanics combined with AI decision training.</p>
+        
+        <div class="app-grid">
+          <div class="app-section scroll-reveal" style="--i:1;">
+            <div class="pie-container" style="transform: scale(0.6); margin-top: -30px;"><svg viewBox="0 0 32 32" class="svg-pie"><circle class="pie-bg" r="16" cx="16" cy="16"/><circle class="pie-segment pie-seg-1" r="16" cx="16" cy="16"/><circle class="pie-segment pie-seg-2" r="16" cx="16" cy="16"/></svg><div class="pie-center"></div></div>
+            <h3>1️⃣ Learn</h3>
+            <p>Daily 3-minute lessons covering a single isolated concept for perfect retention.</p>
+          </div>
+          <div class="app-section scroll-reveal" style="--i:2;">
+            <div class="wallet-graphic" style="transform: scale(0.5); height: 70px; margin-top: -30px;"><div class="anim-coin coin-1">₹</div><div class="anim-coin coin-2">₹</div><div class="wallet-icon"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-9H5a2 2 0 0 1-2-2z" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linejoin="round"/></svg></div></div>
+            <h3>2️⃣ Apply</h3>
+            <p>Practice safely through real-world financial friction scenarios.</p>
+          </div>
+          <div class="app-section scroll-reveal" style="--i:3;">
+             <div class="chart-container" style="transform: scale(0.35); margin: -40px auto 10px; min-width:unset; height: 180px;"><div class="chart-bar chart-bar-1" style="height:30%"></div><div class="chart-bar chart-bar-2" style="height:60%"></div><div class="chart-bar chart-bar-3" style="height:100%"></div></div>
+            <h3>3️⃣ Improve</h3>
+            <p>Gather silent AI feedback and watch your analytical strength compound.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI SCENARIO TRAINING -->
+    <section class="section">
+      <div class="container">
+        <h2 class="scroll-reveal">Practice Financial Decisions<br>Without the Real Risk</h2>
+        <p class="subheading scroll-reveal">Face a highly relevant money situation daily. The AI engine works silently to critique your logic.</p>
+        
+        <div class="mock-phone scroll-reveal">
+          <div class="mock-header">FinLit Scenario <span><span class="mock-badge">Level 2</span></span></div>
+          <h3 class="mock-question">You just got your first full salary of ₹30,000. How do you divide it?</h3>
+          <div class="mock-btn">Spend ₹20k, Save ₹10k</div>
+          <div class="mock-btn selected">50/30/20 Budgeting Rule</div>
+          <div class="mock-btn">Invest heavily, ignore emergency fund</div>
+          
+          <div class="mock-feedback">
+            <span>🤖 AI Engine Evaluation</span><br><br>
+            Smart choice. Applying the 50/30/20 rule bounds your wants while securing an emergency fund baseline before investing!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMIFIED STRUCTURE & USERS (FUN TICKER) -->
+    <section class="section glass-bg-alt">
+      <div class="container">
+        <h2 class="scroll-reveal">Built for Real Indian Users</h2>
+        <p class="subheading scroll-reveal" style="margin-bottom: 20px;">Designed to be intuitive, regardless of your background.</p>
+        
+        <!-- NEW INTERACTIVE TICKER -->
+        <div class="users-marquee scroll-reveal">
+          <div class="marquee-row">
+            <div class="user-chip">🎓 Students</div>
+            <div class="user-chip">💼 First-job Professionals</div>
+            <div class="user-chip">💻 Gig Workers</div>
+            <div class="user-chip">👩‍👩‍👧‍👦 Families</div>
+            <div class="user-chip">🎓 Students</div>
+            <div class="user-chip">💼 First-job Professionals</div>
+            <div class="user-chip">💻 Gig Workers</div>
+            <div class="user-chip">👩‍👩‍👧‍👦 Families</div>
+          </div>
+          <div class="marquee-row reverse">
+            <div class="user-chip">👩 Personal Independence</div>
+            <div class="user-chip">🏪 Small Business Owners</div>
+            <div class="user-chip">🌆 Tier 2/3 City Users</div>
+            <div class="user-chip">📈 Beginner Investors</div>
+            <div class="user-chip">👩 Personal Independence</div>
+            <div class="user-chip">🏪 Small Business Owners</div>
+            <div class="user-chip">🌆 Tier 2/3 City Users</div>
+            <div class="user-chip">📈 Beginner Investors</div>
+          </div>
+        </div>
+
+        <div class="app-grid scroll-reveal" style="margin-top: 50px;">
+          <div class="app-section">
+            <h3 style="border-bottom:none;">🏠 Home Dashboard</h3>
+            <p>Track your daily streaks, XP points, and unlock live challenges.</p>
+          </div>
+          <div class="app-section">
+            <h3 style="border-bottom:none;">📖 Learn Modules</h3>
+            <p>Master one core concept per screen with instant positive feedback loops.</p>
+          </div>
+          <div class="app-section">
+            <h3 style="border-bottom:none;">⚡ Scenario Logic</h3>
+            <p>Face daily financial hurdles with our silent AI evaluating your path.</p>
+          </div>
+          <div class="app-section">
+            <h3 style="border-bottom:none;">📊 Growth Profile</h3>
+            <p>Watch your financial strengths grow visually alongside goal milestones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section glass-bg scroll-reveal" style="position: relative;">
+      <div class="pulse-rings"><div class="ring"></div><div class="ring"></div></div>
+      <div class="container center-text" style="position: relative; z-index: 10;">
+        <h2>Start Building Financial<br>Confidence Today.</h2>
+        <div class="dual-cta">
+          <button class="cta-button" onclick="alert('Platform opening shortly')">
+            Start Learning
+          </button>
+          <button class="cta-button accent-mode" onclick="startSurvey()">
+            Get Your AI Roadmap
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="survey-view" class="hidden">
+    <div class="survey-container">
+      <button class="back-btn" onclick="returnToHome()">← Back to Home</button>
+      <div id="survey-header">
+        <div class="progress-wrapper">
+          <span id="level-indicator">Question 1 of 10</span>
+          <div class="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+        </div>
+        <h2 class="survey-title">Let’s map your logic baseline.</h2>
+        <p class="survey-subtext">This data trains the FinLit AI engine to your exact needs.</p>
+      </div>
+      <div id="question-container" class="question-container"></div>
+      <div id="options-container" class="options-container"></div>
+    </div>
+  </main>
+
+  <main id="result-view" class="hidden">
+    <div class="result-container">
+      <button class="back-btn" onclick="returnToHome()">← Back to Home</button>
+      <h2 id="loading-text">Extracting Analytics Profile...</h2>
+      <div id="result-content" class="hidden result-content">
+        <p class="celebrate">Assessment Complete ✓</p>
+        <h1 id="personality-title" class="primary-text">Profile Extracted</h1>
+        <p id="personality-desc" class="personality-desc">...</p>
+        <button class="cta-button mt-large" onclick="alert('Initiating Core AI Platform...')">Enter Platform Dashboard</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="blob blob-1"></div><div class="blob blob-2"></div>
+  <script src="script.js"></script>
+</body>
+</html>
