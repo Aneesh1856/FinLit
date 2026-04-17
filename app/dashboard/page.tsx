@@ -80,6 +80,7 @@ export default function DashboardPage() {
           FinLit
         </Link>
         <Link href="/learn/income" className="nav-link">Learn</Link>
+        <Link href="/dashboard/predictor" className="nav-link">Predictor</Link>
         <Link href="/ai-coach" className="nav-link">AI Coach</Link>
         <Link href="/profile" className="nav-link">Profile</Link>
         <button className="nav-link cta" onClick={() => supabase.auth.signOut().then(() => window.location.href = '/')}>Sign Out</button>
@@ -167,16 +168,32 @@ export default function DashboardPage() {
           })}
         </div>
 
-        {/* ── AI COACH PROMO ── */}
-        <div className={styles.aiPromo}>
-          <div className={styles.aiPromoContent}>
-            <div style={{ fontSize: '3rem' }}>🤖</div>
-            <div>
-              <h3>Chat with your AI Finance Coach</h3>
-              <p>Ask anything about budgeting, SIPs, taxes, or run financial simulations.</p>
+        {/* ── ADVANCED AI TOOLS ── */}
+        <h2 className={styles.sectionTitle}>🧠 Advanced AI Tools</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+          
+          <div className={styles.aiPromo} style={{ margin: 0 }}>
+            <div className={styles.aiPromoContent}>
+              <div style={{ fontSize: '3rem' }}>🤖</div>
+              <div>
+                <h3>Chat with AI Coach</h3>
+                <p>Ask anything about budgeting, taxes, or run simulations.</p>
+              </div>
             </div>
+            <Link href="/ai-coach" className="cta-button accent-mode">Talk to AI Coach →</Link>
           </div>
-          <Link href="/ai-coach" className="cta-button accent-mode">Talk to AI Coach →</Link>
+
+          <div className={styles.aiPromo} style={{ margin: 0, background: 'linear-gradient(135deg, white, #EEF2FF)', borderColor: 'var(--blue-light)' }}>
+            <div className={styles.aiPromoContent}>
+              <div style={{ fontSize: '3rem' }}>📈</div>
+              <div>
+                <h3>AI Stock Predictor</h3>
+                <p>NLP Sentiment + Time-Series analysis for Indian stocks.</p>
+              </div>
+            </div>
+            <Link href="/dashboard/predictor" className="cta-button">Run Predictor Engine →</Link>
+          </div>
+
         </div>
       </div>
     </>

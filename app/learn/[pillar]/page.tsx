@@ -20,7 +20,7 @@ export default function LearnPillarPage({ params }: { params: { pillar: string }
       <nav className="nav">
         <Link href="/" className="nav-logo">
           <img src="/logo.jpeg" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-          FinLit AI
+          FinLit
         </Link>
         <Link href="/dashboard" className="nav-link">Dashboard</Link>
         <Link href="/ai-coach" className="nav-link">AI Coach</Link>

@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     const chat = model.startChat({
       history: [
         { role: 'user', parts: [{ text: 'System context: ' + SYSTEM_PROMPT }] },
-        { role: 'model', parts: [{ text: 'Understood! I\'m ready to help as FinLit AI Coach with India-specific financial advice.' }] },
+        { role: 'model', parts: [{ text: 'Understood! I\'m ready to help as FinLit Coach with India-specific financial advice.' }] },
         ...formattedHistory,
       ],
     });
