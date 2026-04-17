@@ -30,9 +30,22 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Bypass for non-GET requests (like Login POST) and Auth/API routes
+  if (
+    event.request.method !== 'GET' || 
+    event.request.url.includes('/auth/') || 
+    event.request.url.includes('/api/') ||
+    event.request.url.includes('supabase.co')
+  ) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+      return response || fetch(event.request).catch(() => {
+        // Fallback for failed network requests
+        return null;
+      });
     })
   );
 });
