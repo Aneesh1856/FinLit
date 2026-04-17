@@ -4,70 +4,54 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
+// This component handles the case where the app was COLD STARTED
+// via a deep link (e.g., the app was fully closed when the OAuth redirect fired).
+// For WARM starts (app already open), the Login page handles it inline.
 export default function AuthHandler() {
   const router = useRouter();
 
   useEffect(() => {
-    alert('[DEBUG] AuthListener is Active!');
-    const handleAuthUrl = async (urlStr: string) => {
-      // DEBUG: Show the raw URL on the phone
-      console.log('Detected Deep Link:', urlStr);
-      
+    const handleColdStartUrl = async (urlStr: string) => {
+      if (!urlStr || !urlStr.startsWith('com.finlit.ai://')) return;
+
       try {
-        // Fix for new URL() not liking custom schemes like com.finlit.ai
-        const processedUrl = urlStr.replace('com.finlit.ai://', 'https://auth.callback/');
+        const processedUrl = urlStr.replace('com.finlit.ai://', 'https://placeholder.com/');
         const url = new URL(processedUrl);
-        
-        // Supabase tokens are usually in the #hash
         const hash = url.hash.substring(1);
         const search = url.search.substring(1);
         const params = new URLSearchParams(hash || search);
-        
+
         const accessToken = params.get('access_token');
         const refreshToken = params.get('refresh_token');
 
         if (accessToken && refreshToken) {
-          alert('Tokens detected! Logging you in...');
           const { error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken,
           });
-
           if (!error) {
-            alert('Login Successful! Redirecting to Dashboard...');
-            window.location.href = '/dashboard';
-          } else {
-            alert('Supabase Auth Error: ' + error.message);
+            router.replace('/dashboard');
           }
         }
-      } catch (e: any) {
-        // Only alert if it looks like an auth URL
-        if (urlStr.includes('access_token')) {
-          alert('URL Parse Error: ' + e.message + '\nURL: ' + urlStr);
-        }
+      } catch (e) {
+        console.error('AuthHandler: Error parsing cold-start URL', e);
       }
     };
 
-    const setupDeepLinkListener = async () => {
-      const { App } = await import('@capacitor/app');
+    // Only run this on native platforms
+    const setupColdStartHandler = async () => {
+      if (typeof window === 'undefined') return;
+      const { Capacitor } = await import('@capacitor/core');
+      if (!Capacitor.isNativePlatform()) return;
 
-      // 1. Handle Cold Start
+      const { App } = await import('@capacitor/app');
       const launchUrl = await App.getLaunchUrl();
       if (launchUrl?.url) {
-        handleAuthUrl(launchUrl.url);
+        handleColdStartUrl(launchUrl.url);
       }
-
-      // 2. Handle Warm Start
-      App.addListener('appUrlOpen', (event: any) => {
-        handleAuthUrl(event.url);
-      });
     };
 
-    setupDeepLinkListener();
-
-    return () => {
-      import('@capacitor/app').then(({ App }) => App.removeAllListeners());
-    };
+    setupColdStartHandler();
   }, [router]);
 
   return null;
