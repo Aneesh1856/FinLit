@@ -9,40 +9,52 @@ export default function AuthHandler() {
   const router = useRouter();
 
   useEffect(() => {
-    // Listener for Deep Links (com.finlit.ai://)
-    const setupDeepLinkListener = async () => {
-      App.addListener('appUrlOpen', async (event: any) => {
-        const url = new URL(event.url);
-        
-        // Supabase returns tokens in the hash (#access_token=...)
+    const handleAuthUrl = async (urlStr: string) => {
+      try {
+        const url = new URL(urlStr);
+        // Supabase tokens can be in the hash (#) or search (?) params
         const hash = url.hash.substring(1);
-        const params = new URLSearchParams(hash);
+        const search = url.search.substring(1);
+        const params = new URLSearchParams(hash || search);
         
         const accessToken = params.get('access_token');
         const refreshToken = params.get('refresh_token');
 
         if (accessToken && refreshToken) {
-          console.log('Deep link detected. Setting Supabase session...');
           const { error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken,
           });
 
           if (!error) {
-            router.push('/dashboard');
-            // Force a reload to ensure all components see the new session
+            // Give user feedback on the phone
+            alert('Login Successful! Redirecting...');
             window.location.href = '/dashboard';
           } else {
-            console.error('Error setting session from deep link:', error.message);
+            alert('Auth Error: ' + error.message);
           }
         }
+      } catch (e) {
+        console.error('Error parsing auth URL', e);
+      }
+    };
+
+    const setupDeepLinkListener = async () => {
+      // 1. Handle "Cold Start" (App was closed when link was clicked)
+      const launchUrl = await App.getLaunchUrl();
+      if (launchUrl?.url) {
+        handleAuthUrl(launchUrl.url);
+      }
+
+      // 2. Handle "Warm Start" (App was already open)
+      App.addListener('appUrlOpen', (event: any) => {
+        handleAuthUrl(event.url);
       });
     };
 
     setupDeepLinkListener();
 
     return () => {
-      // Cleanup listener on unmount
       App.removeAllListeners();
     };
   }, [router]);
