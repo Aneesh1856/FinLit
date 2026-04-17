@@ -64,12 +64,12 @@ export default function LoginPage() {
 
     try {
       // Determine the redirect URL based on the environment
-      let redirectTo = 'https://finlit-ai.vercel.app/dashboard';
+      let redirectTo = 'https://finlit-ai.vercel.app/auth/callback';
       
       if (Capacitor.isNativePlatform()) {
         redirectTo = 'com.finlit.ai://dashboard';
       } else if (typeof window !== 'undefined') {
-        redirectTo = `${window.location.origin}/dashboard`;
+        redirectTo = `${window.location.origin}/auth/callback`;
       }
 
       const { error } = await supabase.auth.signInWithOAuth({ 
