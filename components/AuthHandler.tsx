@@ -40,13 +40,18 @@ export default function AuthHandler() {
         }
       };
 
-      // 1. Handle "Cold Start"
+      // 1. Handle "Browser Landing" (Website version)
+      if (typeof window !== 'undefined') {
+        handleAuthUrl(window.location.href);
+      }
+
+      // 2. Handle "Native Cold Start"
       const launchUrl = await App.getLaunchUrl();
       if (launchUrl?.url) {
         handleAuthUrl(launchUrl.url);
       }
 
-      // 2. Handle "Warm Start"
+      // 3. Handle "Warm Start"
       App.addListener('appUrlOpen', (event: any) => {
         handleAuthUrl(event.url);
       });
