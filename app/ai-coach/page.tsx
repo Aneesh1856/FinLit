@@ -17,7 +17,7 @@ const QUICK_PROMPTS = [
 
 export default function AICoachPage() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Namaste! 🙏 I'm your FinLit AI Coach, powered by Gemini. I can help with budgeting, investing, taxes, insurance, or anything about personal finance in India. What would you like to learn today?" }
+    { role: 'assistant', content: "Namaste! 🙏 I'm your FinLit Coach, powered by Gemini. I can help with budgeting, investing, taxes, insurance, or anything about personal finance in India. What would you like to learn today?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -114,7 +114,7 @@ export default function AICoachPage() {
       <nav className="nav">
         <Link href="/" className="nav-logo">
           <img src="/logo.jpeg" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-          FinLit AI
+          FinLit
         </Link>
         <Link href="/dashboard" className="nav-link">Dashboard</Link>
         <Link href="/learn/income" className="nav-link">Learn</Link>

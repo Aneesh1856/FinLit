@@ -1,6 +1,6 @@
 {
-  "name": "FinLit AI — Financial Learning",
-  "short_name": "FinLit AI",
+  "name": "FinLit — Financial Learning",
+  "short_name": "FinLit",
   "description": "Gamified financial literacy for India, powered by Gemini AI",
   "start_url": "/",
   "display": "standalone",

@@ -76,7 +76,7 @@ export default function ProfilePage() {
       <nav className="nav">
         <Link href="/" className="nav-logo">
           <img src="/logo.jpeg" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-          FinLit AI
+          FinLit
         </Link>
         <Link href="/dashboard" className="nav-link">Dashboard</Link>
         <Link href="/learn/income" className="nav-link">Learn</Link>

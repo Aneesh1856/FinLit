@@ -43,7 +43,7 @@ export default function LandingPage() {
       <nav className="nav">
         <Link href="/" className="nav-logo">
           <img src="/logo.jpeg" alt="Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-          FinLit AI
+          FinLit
         </Link>
         <Link href="/learn" className="nav-link">Learn</Link>
         <Link href="/ai-coach" className="nav-link">AI Coach</Link>
@@ -54,7 +54,7 @@ export default function LandingPage() {
       {/* ── HERO ─────────────────────────────────────────── */}
       <header className={styles.heroSection}>
         <div className={styles.heroContent}>
-          <div className="pill-badge hero-anim hero-anim-1">🎓 FinLit AI Platform</div>
+          <div className="pill-badge hero-anim hero-anim-1">🎓 FinLit Platform</div>
           <h1 className="hero-anim hero-anim-2">
             Master Money.<br />Make Smarter Decisions.<br />
             <span className="primary-text">Every Single Day.</span>
@@ -64,13 +64,13 @@ export default function LandingPage() {
             We replace boring lectures with real-life scenario training.
           </p>
           <div className={`${styles.dualCta} hero-anim hero-anim-4`}>
-            <Link href="/onboarding" className="cta-button">🚀 Start Learning Free</Link>
+            <Link href="/auth/login" className="cta-button">🚀 Start Learning Free</Link>
             <Link href="/onboarding" className="cta-button accent-mode">📊 Get Your AI Roadmap</Link>
           </div>
           <p className="small-text hero-anim hero-anim-4">No prior knowledge required. Just 5 minutes a day.</p>
         </div>
         <div className={`${styles.heroImageWrapper} hero-anim hero-anim-3`}>
-          <img src="/finlit.jpeg" alt="FinLit AI App Dashboard" className={styles.finlitImg} />
+          <img src="/finlit.jpeg" alt="FinLit App Dashboard" className={styles.finlitImg} />
         </div>
       </header>
 
@@ -171,7 +171,7 @@ export default function LandingPage() {
             ].map((p, i) => (
               <Link
                 key={p.title}
-                href={`/learn/${p.title.toLowerCase()}`}
+                href="/auth/login"
                 className={`${styles.pillarCard} scroll-reveal`}
                 style={{ ['--i' as string]: i + 1, ['--pillar-color' as string]: p.color }}
               >
@@ -237,8 +237,8 @@ export default function LandingPage() {
           <h2>Start Building Financial<br />Confidence Today.</h2>
           <p className="subheading">Join thousands of Indians making smarter money moves.</p>
           <div className={styles.dualCta}>
-            <Link href="/onboarding" className="cta-button">🚀 Start Free</Link>
-            <Link href="/ai-coach" className="cta-button accent-mode">🤖 Ask AI Coach</Link>
+            <Link href="/auth/login" className="cta-button">🚀 Start Free</Link>
+            <Link href="/auth/login" className="cta-button accent-mode">🤖 Ask AI Coach</Link>
           </div>
         </div>
       </section>
@@ -246,8 +246,8 @@ export default function LandingPage() {
       {/* ── FOOTER ───────────────────────────────────────── */}
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span className={styles.footerLogo}>💰 FinLit AI</span>
-          <p>© 2024 FinLit AI. Making financial education accessible for every Indian.</p>
+          <span className={styles.footerLogo}>💰 FinLit</span>
+
           <div className={styles.footerLinks}>
             <Link href="/onboarding">Get Started</Link>
             <Link href="/learn/income">Curriculum</Link>

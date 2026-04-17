@@ -50,7 +50,7 @@ export default function SignupPage() {
   return (
     <div className={styles.authOuter}>
       <div className={styles.authCard}>
-        <Link href="/" className={styles.logo}>💰 FinLit AI</Link>
+        <Link href="/" className={styles.logo}>💰 FinLit</Link>
         <h1 className={styles.authTitle}>Create your account</h1>
         <p className={styles.authSub}>Start your personalized financial learning journey.</p>
 

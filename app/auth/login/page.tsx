@@ -140,7 +140,7 @@ export default function LoginPage() {
   return (
     <div className={styles.authOuter}>
       <div className={styles.authCard}>
-        <Link href="/" className={styles.logo}>💰 FinLit AI</Link>
+        <Link href="/" className={styles.logo}>💰 FinLit</Link>
         <h1 className={styles.authTitle}>Welcome back</h1>
         <p className={styles.authSub}>Continue your financial learning journey.</p>
 
@@ -167,7 +167,7 @@ export default function LoginPage() {
         </form>
 
         <p className={styles.switchLink}>
-          New to FinLit AI? <Link href="/onboarding">Take the assessment →</Link>
+          New to FinLit? <Link href="/onboarding">Take the assessment →</Link>
         </p>
       </div>
     </div>

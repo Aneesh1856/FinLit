@@ -216,7 +216,7 @@ export default function OnboardingPage() {
             <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
           </div>
           <h2 className={styles.surveyTitle}>Let&apos;s map your financial baseline.</h2>
-          <p className={styles.surveySubtext}>This trains the FinLit AI engine to your exact needs.</p>
+          <p className={styles.surveySubtext}>This trains the FinLit engine to your exact needs.</p>
         </div>
 
         <div className={styles.questionText}>{qData?.question}</div>

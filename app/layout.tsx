@@ -3,7 +3,7 @@ import './globals.css';
 import AuthHandler from '@/components/AuthHandler';
 
 export const metadata: Metadata = {
-  title: 'FinLit AI — Master Money. Make Smarter Decisions.',
+  title: 'FinLit — Master Money. Make Smarter Decisions.',
   description:
     'A gamified, AI-powered financial literacy platform for India. Learn budgeting, investing, taxes, and more in just 5 minutes a day.',
   keywords: 'financial literacy, personal finance India, SIP, EMI, budgeting, Gemini AI, investing',
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'FinLit AI',
+    title: 'FinLit',
   },
   openGraph: {
-    title: 'FinLit AI – Master Money. Make Smarter Decisions.',
+    title: 'FinLit – Master Money. Make Smarter Decisions.',
     description: 'Human-centric AI financial education for India. Gamified learning, AI coach, simulators.',
     type: 'website',
   },
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#2A5DFF" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="FinLit AI" />
+        <meta name="apple-mobile-web-app-title" content="FinLit" />
       </head>
       <body>
         <div className="blob blob-1" />

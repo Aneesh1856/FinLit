@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.finlit.ai',
-  appName: 'FinLit AI',
+  appName: 'FinLit',
   webDir: 'out',
   server: {
     url: 'https://finlit-ai.vercel.app/',
