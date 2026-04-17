@@ -2,6 +2,12 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 24px 24px 60px;
+  box-sizing: border-box;
+}
+@media (max-width: 600px) {
+  .coachOuter {
+    padding: 16px 12px 40px;
+  }
 }
 .tabBar {
   display: flex;
@@ -63,12 +69,19 @@
   flex-shrink: 0;
 }
 .msgBubble {
-  max-width: 80%;
+  max-width: 85%;
   padding: 14px 18px;
   border-radius: 18px;
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .msgBubble {
+    max-width: 90%;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
 }
 .msgBubble p { margin-bottom: 4px; }
 .msgBubble p:last-child { margin-bottom: 0; }
@@ -250,7 +263,10 @@
 }
 @media (max-width: 600px) {
   .calcContainer { padding: 24px 20px; }
-  .chatContainer { height: calc(100vh - 180px); }
-  .tabBar { gap: 6px; }
+  .chatContainer { height: calc(100vh - 180px); border-radius: 16px; }
+  .tabBar { gap: 6px; padding-bottom: 8px; }
   .tabBtn { padding: 8px 14px; font-size: 0.8rem; }
+  .inputArea { padding: 10px 12px; gap: 6px; }
+  .voiceBtn, .sendBtn { width: 40px; height: 40px; }
+  .chatInput { padding: 8px 12px; font-size: 0.9rem; }
 }
