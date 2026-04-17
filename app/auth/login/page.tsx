@@ -50,7 +50,15 @@ export default function LoginPage() {
     }, 10000);
 
     try {
-      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: `${window.location.origin}/dashboard` } });
+      // Determine the redirect URL based on the current logic
+      const redirectTo = typeof window !== 'undefined' 
+        ? `${window.location.origin}/dashboard` 
+        : 'https://finlit-ai.vercel.app/dashboard';
+
+      const { error } = await supabase.auth.signInWithOAuth({ 
+        provider: 'google', 
+        options: { redirectTo } 
+      });
       clearTimeout(timeoutId);
       
       if (error) {
