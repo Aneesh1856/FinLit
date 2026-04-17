@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import AuthHandler from '@/components/AuthHandler';
 
 export const metadata: Metadata = {
   title: 'FinLit AI — Master Money. Make Smarter Decisions.',
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="blob blob-1" />
         <div className="blob blob-2" />
+        <AuthHandler />
         {children}
         <script
           dangerouslySetInnerHTML={{

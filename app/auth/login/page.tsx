@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { Capacitor } from '@capacitor/core';
 import styles from '../auth.module.css';
 
 export default function LoginPage() {
@@ -50,10 +51,14 @@ export default function LoginPage() {
     }, 10000);
 
     try {
-      // Determine the redirect URL based on the current logic
-      const redirectTo = typeof window !== 'undefined' 
-        ? `${window.location.origin}/dashboard` 
-        : 'https://finlit-ai.vercel.app/dashboard';
+      // Determine the redirect URL based on the environment
+      let redirectTo = 'https://finlit-ai.vercel.app/dashboard';
+      
+      if (Capacitor.isNativePlatform()) {
+        redirectTo = 'com.finlit.ai://dashboard';
+      } else if (typeof window !== 'undefined') {
+        redirectTo = `${window.location.origin}/dashboard`;
+      }
 
       const { error } = await supabase.auth.signInWithOAuth({ 
         provider: 'google', 
