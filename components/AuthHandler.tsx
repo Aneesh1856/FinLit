@@ -8,6 +8,7 @@ export default function AuthHandler() {
   const router = useRouter();
 
   useEffect(() => {
+    alert('[DEBUG] AuthListener is Active!');
     const handleAuthUrl = async (urlStr: string) => {
       // DEBUG: Show the raw URL on the phone
       console.log('Detected Deep Link:', urlStr);
