@@ -9,9 +9,15 @@ export default function AuthHandler() {
 
   useEffect(() => {
     const handleAuthUrl = async (urlStr: string) => {
+      // DEBUG: Show the raw URL on the phone
+      console.log('Detected Deep Link:', urlStr);
+      
       try {
-        const url = new URL(urlStr);
-        // Supabase tokens can be in the hash (#) or search (?) params
+        // Fix for new URL() not liking custom schemes like com.finlit.ai
+        const processedUrl = urlStr.replace('com.finlit.ai://', 'https://auth.callback/');
+        const url = new URL(processedUrl);
+        
+        // Supabase tokens are usually in the #hash
         const hash = url.hash.substring(1);
         const search = url.search.substring(1);
         const params = new URLSearchParams(hash || search);
@@ -20,35 +26,37 @@ export default function AuthHandler() {
         const refreshToken = params.get('refresh_token');
 
         if (accessToken && refreshToken) {
+          alert('Tokens detected! Logging you in...');
           const { error } = await supabase.auth.setSession({
             access_token: accessToken,
             refresh_token: refreshToken,
           });
 
           if (!error) {
-            // Give user feedback on the phone
-            alert('Login Successful! Redirecting...');
+            alert('Login Successful! Redirecting to Dashboard...');
             window.location.href = '/dashboard';
           } else {
-            alert('Auth Error: ' + error.message);
+            alert('Supabase Auth Error: ' + error.message);
           }
         }
-      } catch (e) {
-        console.error('Error parsing auth URL', e);
+      } catch (e: any) {
+        // Only alert if it looks like an auth URL
+        if (urlStr.includes('access_token')) {
+          alert('URL Parse Error: ' + e.message + '\nURL: ' + urlStr);
+        }
       }
     };
 
     const setupDeepLinkListener = async () => {
-      // Dynamic import to prevent SSR crash
       const { App } = await import('@capacitor/app');
 
-      // 1. Handle "Cold Start" (App was closed when link was clicked)
+      // 1. Handle Cold Start
       const launchUrl = await App.getLaunchUrl();
       if (launchUrl?.url) {
         handleAuthUrl(launchUrl.url);
       }
 
-      // 2. Handle "Warm Start" (App was already open)
+      // 2. Handle Warm Start
       App.addListener('appUrlOpen', (event: any) => {
         handleAuthUrl(event.url);
       });
@@ -57,7 +65,6 @@ export default function AuthHandler() {
     setupDeepLinkListener();
 
     return () => {
-      // Inline cleanup if App was loaded
       import('@capacitor/app').then(({ App }) => App.removeAllListeners());
     };
   }, [router]);
