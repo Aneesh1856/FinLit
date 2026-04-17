@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { Capacitor } from '@capacitor/core';
 import styles from '../auth.module.css';
 
 export default function LoginPage() {
@@ -62,9 +63,6 @@ export default function LoginPage() {
     }, 10000);
 
     try {
-      // Import Capacitor dynamically to avoid SSR issues
-      const { Capacitor } = await import('@capacitor/core');
-
       // Determine the redirect URL based on the environment
       let redirectTo = 'https://finlit-ai.vercel.app/dashboard';
       
@@ -76,13 +74,7 @@ export default function LoginPage() {
 
       const { error } = await supabase.auth.signInWithOAuth({ 
         provider: 'google', 
-        options: { 
-          redirectTo,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          }
-        } 
+        options: { redirectTo } 
       });
       clearTimeout(timeoutId);
       

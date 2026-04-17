@@ -1,74 +1,23 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
-import { NextResponse, type NextRequest } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const protectedRoutes = ['/dashboard', '/profile'];
+  const isProtected = protectedRoutes.some(r => pathname.startsWith(r));
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value;
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          request.cookies.set({
-            name,
-            value,
-            ...options,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          });
-        },
-        remove(name: string, options: CookieOptions) {
-          request.cookies.set({
-            name,
-            value: '',
-            ...options,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          });
-        },
-      },
-    }
-  );
+  if (!isProtected) return NextResponse.next();
 
-  const { data: { user } } = await supabase.auth.getUser();
+  // Check auth cookie (Supabase sets sb-*-auth-token cookies)
+  const authCookie = req.cookies.get('sb-access-token')
+    || req.cookies.getAll().find(c => c.name.includes('-auth-token'));
 
-  // If the user is logged in, they shouldn't land on auth pages
-  if (user && request.nextUrl.pathname.startsWith('/auth')) {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+  if (!authCookie) {
+    return NextResponse.redirect(new URL('/auth/login', req.url));
   }
-
-  // If the user is NOT logged in, they shouldn't land on protected pages
-  if (!user && (request.nextUrl.pathname.startsWith('/dashboard') || request.nextUrl.pathname.startsWith('/profile'))) {
-    return NextResponse.redirect(new URL('/auth/login', request.url));
-  }
-
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+  matcher: ['/dashboard/:path*', '/profile/:path*'],
 };
