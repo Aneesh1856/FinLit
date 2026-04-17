@@ -1,26 +1,35 @@
 import { createBrowserClient, createServerClient, type CookieOptions } from '@supabase/ssr';
-import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// Client-side Supabase client (used in 'use client' components)
+// Client-side Supabase client
 export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
 
-// Server-side Supabase client (used in API routes and Server Actions)
-export function createClient(request?: NextRequest, response?: NextResponse) {
+// Server-side Supabase client (Modern App Router version)
+export function createClient() {
+  const cookieStore = cookies();
+
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       get(name: string) {
-        return request?.cookies.get(name)?.value;
+        return cookieStore.get(name)?.value;
       },
       set(name: string, value: string, options: CookieOptions) {
-        request?.cookies.set({ name, value, ...options });
-        response?.cookies.set({ name, value, ...options });
+        try {
+          cookieStore.set({ name, value, ...options });
+        } catch (error) {
+          // The `set` method was called from a Server Component.
+          // This can be ignored if you have middleware refreshing user sessions.
+        }
       },
       remove(name: string, options: CookieOptions) {
-        request?.cookies.set({ name, value: '', ...options });
-        response?.cookies.set({ name, value: '', ...options });
+        try {
+          cookieStore.set({ name, value: '', ...options });
+        } catch (error) {
+          // The `delete` method was called from a Server Component.
+        }
       },
     },
   });
