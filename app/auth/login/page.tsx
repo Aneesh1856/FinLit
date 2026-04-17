@@ -18,10 +18,20 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      const msg = 'CRITICAL: Supabase keys are missing in Vercel settings!';
+      alert(msg);
+      setError(msg);
+      setLoading(false);
+      return;
+    }
     
     const timeoutId = setTimeout(() => {
       setLoading(false);
-      setError('Login timed out. Please check your internet connection or Supabase API keys.');
+      const msg = 'Login timed out. Check your internet or Supabase API keys.';
+      alert(msg);
+      setError(msg);
     }, 10000);
 
     try {
@@ -29,6 +39,7 @@ export default function LoginPage() {
       clearTimeout(timeoutId);
       
       if (error) { 
+        alert('Login Error: ' + error.message);
         setError(error.message); 
         setLoading(false); 
         return; 
@@ -36,6 +47,7 @@ export default function LoginPage() {
       router.push('/dashboard');
     } catch (err: any) {
       clearTimeout(timeoutId);
+      alert('System Error: ' + err.message);
       setError('An unexpected error occurred during sign in.');
       setLoading(false);
     }
