@@ -67,30 +67,50 @@ export default function LoginPage() {
 
         // 3. Listen for the deep link coming back into the app
         const listener = await App.addListener('appUrlOpen', async (event) => {
-          await listener.remove(); // Clean up listener immediately
-          await Browser.close();   // Close the in-app browser
+          await listener.remove();
+          await Browser.close();
 
-          const url = new URL(event.url.replace('com.finlit.ai://', 'https://placeholder.com/'));
-          const hash = url.hash.substring(1);
-          const search = url.search.substring(1);
-          const params = new URLSearchParams(hash || search);
+          const rawUrl = event.url;
+          // Normalize custom scheme for URL parsing
+          const processedUrl = rawUrl.replace('com.finlit.ai://', 'https://placeholder.com/');
+          const url = new URL(processedUrl);
 
-          const accessToken = params.get('access_token');
-          const refreshToken = params.get('refresh_token');
+          // PKCE flow returns ?code=xxx (modern Supabase default)
+          const code = url.searchParams.get('code');
 
-          if (accessToken && refreshToken) {
-            const { error: sessionError } = await supabase.auth.setSession({
-              access_token: accessToken,
-              refresh_token: refreshToken,
-            });
-            if (!sessionError) {
-              window.location.href = '/dashboard';
+          // Implicit flow returns #access_token=xxx (older flow)
+          const hashParams = new URLSearchParams(url.hash.substring(1));
+          const accessToken = hashParams.get('access_token');
+          const refreshToken = hashParams.get('refresh_token');
+
+          try {
+            if (code) {
+              // Exchange the PKCE code for a session
+              const { error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
+              if (!sessionError) {
+                window.location.href = '/dashboard';
+              } else {
+                setError('Auth error: ' + sessionError.message);
+                setLoading(false);
+              }
+            } else if (accessToken && refreshToken) {
+              // Fallback: set session directly from tokens
+              const { error: sessionError } = await supabase.auth.setSession({
+                access_token: accessToken,
+                refresh_token: refreshToken,
+              });
+              if (!sessionError) {
+                window.location.href = '/dashboard';
+              } else {
+                setError('Session error: ' + sessionError.message);
+                setLoading(false);
+              }
             } else {
-              setError('Session error: ' + sessionError.message);
+              setError('No auth data received. Please try again.');
               setLoading(false);
             }
-          } else {
-            setError('Could not get login tokens. Please try again.');
+          } catch (e: any) {
+            setError('Login failed: ' + e.message);
             setLoading(false);
           }
         });
