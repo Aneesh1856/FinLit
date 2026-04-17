@@ -64,7 +64,7 @@
 
 .cardsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 24px;
   margin-bottom: 40px;
@@ -121,12 +121,16 @@
 /* ── PILLARS ── */
 .pillarsSection { background: transparent; }
 .pillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   margin-top: 32px;
 }
 .pillarCard {
+  flex: 0 0 calc(33.333% - 14px);
+  min-width: 220px;
+  max-width: 280px;
   background: white;
   border: 2px solid var(--blue-light);
   border-radius: 20px;
@@ -229,11 +233,12 @@
   }
   .dualCta { justify-content: center; }
   .heroImageWrapper { display: none; }
-  .pillarsGrid { grid-template-columns: repeat(2, 1fr); }
+  .cardsGrid { grid-template-columns: 1fr; }
+  .pillarCard { flex: 0 0 calc(50% - 10px); max-width: none; }
 }
 
 @media (max-width: 480px) {
   .section { padding: 50px 16px; }
-  .pillarsGrid { grid-template-columns: 1fr; }
+  .pillarCard { flex: 0 0 100%; max-width: none; }
   .footerLinks { flex-direction: column; gap: 8px; }
 }

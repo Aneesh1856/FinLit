@@ -64,7 +64,7 @@ export default function LandingPage() {
             We replace boring lectures with real-life scenario training.
           </p>
           <div className={`${styles.dualCta} hero-anim hero-anim-4`}>
-            <Link href="/onboarding" className="cta-button">🚀 Start Learning Free</Link>
+            <Link href="/auth/login" className="cta-button">🚀 Start Learning Free</Link>
             <Link href="/onboarding" className="cta-button accent-mode">📊 Get Your AI Roadmap</Link>
           </div>
           <p className="small-text hero-anim hero-anim-4">No prior knowledge required. Just 5 minutes a day.</p>
@@ -236,8 +236,8 @@ export default function LandingPage() {
         <div className={styles.container} style={{ position: 'relative', zIndex: 10 }}>
           <h2>Start Building Financial<br />Confidence Today.</h2>
           <p className="subheading">Join thousands of Indians making smarter money moves.</p>
-          <div className={styles.dualCta}>
-            <Link href="/onboarding" className="cta-button">🚀 Start Free</Link>
+          <div className={styles.dualCta} style={{ justifyContent: 'center' }}>
+            <Link href="/auth/login" className="cta-button">🚀 Start Free</Link>
             <Link href="/ai-coach" className="cta-button accent-mode">🤖 Ask AI Coach</Link>
           </div>
         </div>
@@ -247,12 +247,7 @@ export default function LandingPage() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <span className={styles.footerLogo}>💰 FinLit AI</span>
-          <p>© 2024 FinLit AI. Making financial education accessible for every Indian.</p>
-          <div className={styles.footerLinks}>
-            <Link href="/onboarding">Get Started</Link>
-            <Link href="/learn/income">Curriculum</Link>
-            <Link href="/ai-coach">AI Coach</Link>
-          </div>
+
         </div>
       </footer>
     </>
